@@ -2,12 +2,15 @@ package com.rommelrico.memorableplacesandroid
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.view.KeyEvent
+import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -15,6 +18,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -59,6 +64,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    }
+
+    fun onMapLongClick(latLng: LatLng) {
+        val geocoder = Geocoder(applicationContext, Locale.getDefault())
+        var address = ""
+
+        try {
+            val listAdddresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+            if (listAdddresses != null && listAdddresses.size > 0) {
+                if (listAdddresses[0].thoroughfare != null) {
+                    if (listAdddresses[0].subThoroughfare != null) {
+                        address += listAdddresses[0].subThoroughfare + " "
+                    }
+                    address += listAdddresses[0].thoroughfare
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        if (address == "") {
+            val sdf = SimpleDateFormat("HH:mm yyyy-MM-dd")
+            address += sdf.format(Date())
+        }
+
+        mMap.addMarker(MarkerOptions().position(latLng).title(address))
+
+        MainActivity.places.add(address)
+        MainActivity.locations.add(latLng)
+        MainActivity.arrayAdapter.notifyDataSetChanged()
+
+        Toast.makeText(this, "Location Saved!", Toast.LENGTH_SHORT).show()
     }
 
     fun centerMapOnLocation(location: Location?, title: String) {
