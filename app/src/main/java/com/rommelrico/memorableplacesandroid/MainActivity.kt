@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         listView.setAdapter(arrayAdapter)
 
-        listView.setOnItemClickListener { adapterView, view, i, l ->
+        listView.setOnItemClickListener { _, _, i, _ ->
             val intent = Intent(applicationContext, MapsActivity::class.java)
             intent.putExtra("placeNumber", i)
             startActivity(intent)
