@@ -12,9 +12,9 @@ import com.google.android.gms.maps.model.LatLng
 
 class MainActivity : AppCompatActivity() {
 
-    internal var places = ArrayList<String>()
-    internal var locations = ArrayList<LatLng>()
-    internal var arrayAdapter: ArrayAdapter<*>? = null
+    var places = ArrayList<String>()
+    var locations = ArrayList<LatLng>()
+    var arrayAdapter: ArrayAdapter<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
