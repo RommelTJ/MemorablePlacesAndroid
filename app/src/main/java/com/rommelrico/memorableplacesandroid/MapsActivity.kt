@@ -1,5 +1,6 @@
 package com.rommelrico.memorableplacesandroid
 
+import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.support.v7.app.AppCompatActivity
@@ -44,4 +45,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
-}
+
+    fun centerMapOnLocation(location: Location?, title: String) {
+        if (location != null) {
+            val userLocation = LatLng(location.latitude, location.longitude)
+            mMap.clear()
+            mMap.addMarker(MarkerOptions().position(userLocation).title(title))
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 12f))
+        }
+    } // end centerMapOnLocation
+
+} // end MapsActivity
