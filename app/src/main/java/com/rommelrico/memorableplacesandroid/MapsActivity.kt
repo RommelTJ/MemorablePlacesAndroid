@@ -97,9 +97,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLon
 
         mMap.addMarker(MarkerOptions().position(latLng).title(address))
 
-//        MainActivity.places.add(address)
-//        MainActivity.locations.add(latLng)
-//        MainActivity.arrayAdapter.notifyDataSetChanged()
+        MainActivity.places.add(address)
+        MainActivity.locations.add(latLng)
+        MainActivity.arrayAdapter?.notifyDataSetChanged()
 
         Toast.makeText(this, "Location Saved!", Toast.LENGTH_SHORT).show()
     }
