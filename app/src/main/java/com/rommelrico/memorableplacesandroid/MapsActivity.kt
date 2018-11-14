@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     internal var locationManager: LocationManager? = null
     internal var locationListener: LocationListener? = null
@@ -59,13 +59,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        mMap.setOnMapLongClickListener(this)
+
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
-    fun onMapLongClick(latLng: LatLng) {
+    override fun onMapLongClick(latLng: LatLng) {
         val geocoder = Geocoder(applicationContext, Locale.getDefault())
         var address = ""
 
