@@ -9,7 +9,6 @@ import android.location.LocationManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.view.KeyEvent
 import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -91,9 +90,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.addMarker(MarkerOptions().position(latLng).title(address))
 
-        MainActivity.places.add(address)
-        MainActivity.locations.add(latLng)
-        MainActivity.arrayAdapter.notifyDataSetChanged()
+//        MainActivity.places.add(address)
+//        MainActivity.locations.add(latLng)
+//        MainActivity.arrayAdapter.notifyDataSetChanged()
 
         Toast.makeText(this, "Location Saved!", Toast.LENGTH_SHORT).show()
     }
