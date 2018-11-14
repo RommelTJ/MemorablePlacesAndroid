@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val listView = findViewById<ListView>(R.id.listView)
         places.add("Add a new place...")
-        locations.add(LatLng(0, 0))
+        locations.add(LatLng(0.0, 0.0))
 
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, places)
 
