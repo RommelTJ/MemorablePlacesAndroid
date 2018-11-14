@@ -1,6 +1,7 @@
 package com.rommelrico.memorableplacesandroid
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
@@ -63,6 +64,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLon
         val intent = intent
         if (intent.getIntExtra("placeNumber", 0) == 0) {
             // Handle placeNumber.
+            // Zoom in on user location
+            locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            locationListener = object : LocationListener {
+                override fun onLocationChanged(location: Location) {
+                    centerMapOnLocation(location, "Your Location")
+                }
+
+                override fun onStatusChanged(s: String, i: Int, bundle: Bundle) {
+
+                }
+
+                override fun onProviderEnabled(s: String) {
+
+                }
+
+                override fun onProviderDisabled(s: String) {
+
+                }
+            }
         } else {
             // Handle no location.
             val placeLocation = Location(LocationManager.GPS_PROVIDER)
