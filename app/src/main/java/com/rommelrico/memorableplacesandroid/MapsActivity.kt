@@ -89,6 +89,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLon
                 // Handling permission.
             } else {
                 // Handling lack of permissions.
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
             }
         } else {
             // Handle no location.
