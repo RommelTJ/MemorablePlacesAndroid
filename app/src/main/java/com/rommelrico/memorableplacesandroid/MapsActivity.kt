@@ -6,11 +6,10 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -66,6 +65,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLon
             // Handle placeNumber.
         } else {
             // Handle no location.
+            val placeLocation = Location(LocationManager.GPS_PROVIDER)
+            placeLocation.latitude = MainActivity.locations.get(intent.getIntExtra("placeNumber", 0)).latitude
+            placeLocation.longitude = MainActivity.locations.get(intent.getIntExtra("placeNumber", 0)).longitude
+            centerMapOnLocation(placeLocation, MainActivity.places.get(intent.getIntExtra("placeNumber", 0)))
         }
     }
 
