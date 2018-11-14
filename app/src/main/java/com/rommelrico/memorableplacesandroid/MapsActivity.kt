@@ -61,10 +61,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLon
 
         mMap.setOnMapLongClickListener(this)
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val intent = intent
+        if (intent.getIntExtra("placeNumber", 0) == 0) {
+            // Handle placeNumber.
+        } else {
+            // Handle no location.
+        }
     }
 
     override fun onMapLongClick(latLng: LatLng) {
